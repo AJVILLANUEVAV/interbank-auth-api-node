@@ -2,6 +2,8 @@
 
 Servicio opcional de autenticación con Node.js y Express para emitir y validar tokens JWT.
 
+El contrato OpenAPI está en `openapi/openapi.yaml` y se puede importar directamente en Swagger Editor.
+
 ## Estado
 
 Scaffold inicial. Se implementará únicamente si se confirma el alcance opcional de seguridad.

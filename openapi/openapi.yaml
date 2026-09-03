@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: Interbank Auth API
+  version: 1.0.0
+  description: Issues JWT access tokens for the challenge environment.
+servers:
+  - url: http://localhost:8082
+    description: Local Docker Compose
+paths:
+  /health:
+    get:
+      summary: Health check
+      operationId: getAuthHealth
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /v1/auth/login:
+    post:
+      summary: Authenticate a user
+      operationId: login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              username: demo
+              password: demo
+      responses:
+        '200':
+          description: JWT access token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    LoginRequest:
+      type: object
+      required: [username, password]
+      properties:
+        username: { type: string, minLength: 1 }
+        password: { type: string, minLength: 1, format: password }
+    LoginResponse:
+      type: object
+      required: [accessToken, tokenType]
+      properties:
+        accessToken: { type: string }
+        tokenType: { type: string, example: Bearer }
+    HealthResponse:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string, example: ok }
+    ErrorResponse:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
