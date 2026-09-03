@@ -6,6 +6,8 @@ info:
 servers:
   - url: http://localhost:8082
     description: Local Docker Compose
+  - url: https://interbank-auth-api-node.onrender.com
+    description: Render production
 paths:
   /health:
     get:
