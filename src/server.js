@@ -4,6 +4,12 @@ import { createAuthService } from './auth.js';
 export function createApp(authService) {
   const app = express();
   app.use(express.json());
+  app.use((request, response, next) => {
+    response.setHeader('Access-Control-Allow-Origin', process.env.WEB_ORIGIN ?? 'http://localhost:3000');
+    response.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    if (request.method === 'OPTIONS') return response.sendStatus(204);
+    return next();
+  });
   app.get('/health', (_request, response) => response.json({ status: 'ok' }));
   app.post('/v1/auth/login', (request, response) => {
     const { username, password } = request.body ?? {};

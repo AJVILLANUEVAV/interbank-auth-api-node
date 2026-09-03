@@ -13,3 +13,5 @@ Scaffold inicial. Se implementará únicamente si se confirma el alcance opciona
 - `PORT`: puerto HTTP, por defecto `8082`.
 - `JWT_SECRET`: secreto usado para firmar tokens; nunca debe versionarse.
 - `JWT_EXPIRES_IN`: duración del token.
+
+Usuario de demostración local: `demo` / `demo`. En producción debe reemplazarse por un proveedor de identidad y almacenamiento de usuarios reales.
