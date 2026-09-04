@@ -8,7 +8,7 @@ El contrato OpenAPI está en `openapi/openapi.yaml` y se puede importar directam
 
 - `PORT`: puerto HTTP, por defecto `8082`.
 - `JWT_SECRET`: secreto usado para firmar tokens; nunca debe versionarse.
-- `JWT_EXPIRES_IN`: duración del token.
+- `JWT_EXPIRES_IN`: duración del token; por defecto `5m`.
 - `WEB_ORIGIN`: origen permitido para solicitudes del frontend, por ejemplo `https://interbank-matrix-qzaru4ygq-ali-vp.vercel.app`.
 
 Usuario de demostración local: `demo` / `demo`. En producción debe reemplazarse por un proveedor de identidad y almacenamiento de usuarios reales.

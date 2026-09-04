@@ -15,13 +15,14 @@ export function createApp(authService) {
     const { username, password } = request.body ?? {};
     const token = authService.authenticate(username, password);
     if (!token) return response.status(401).json({ error: 'invalid credentials' });
-    return response.json({ accessToken: token, tokenType: 'Bearer' });
+    const claims = authService.verify(token);
+    return response.json({ accessToken: token, tokenType: 'Bearer', expiresAt: claims.exp * 1000 });
   });
   return app;
 }
 
 const port = Number(process.env.PORT ?? 8082);
 if (process.env.NODE_ENV !== 'test') {
-  const authService = createAuthService({ secret: process.env.JWT_SECRET ?? 'local-development-secret' });
+  const authService = createAuthService({ secret: process.env.JWT_SECRET ?? 'local-development-secret', expiresIn: process.env.JWT_EXPIRES_IN ?? '5m' });
   createApp(authService).listen(port, () => console.log(`Auth API listening on port ${port}`));
 }

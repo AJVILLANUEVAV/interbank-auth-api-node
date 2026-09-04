@@ -12,3 +12,10 @@ test('rejects invalid credentials', () => {
   const service = createAuthService({ secret: 'test-secret' });
   assert.equal(service.authenticate('demo', 'wrong'), null);
 });
+
+test('uses a five-minute token lifetime by default', () => {
+  const service = createAuthService({ secret: 'test-secret' });
+  const token = service.authenticate('demo', 'demo');
+  const claims = service.verify(token);
+  assert.ok(claims.exp - claims.iat <= 5 * 60);
+});

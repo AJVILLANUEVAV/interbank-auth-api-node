@@ -5,7 +5,7 @@ Configure these environment variables in Render:
 ```text
 PORT=8082
 JWT_SECRET=<same-long-secret-used-by-the-other-APIs>
-JWT_EXPIRES_IN=1h
+JWT_EXPIRES_IN=5m
 WEB_ORIGIN=https://interbank-matrix-qzaru4ygq-ali-vp.vercel.app
 ```
 

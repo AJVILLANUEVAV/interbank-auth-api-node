@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-export function createAuthService({ secret, expiresIn = '1h' }) {
+export function createAuthService({ secret, expiresIn = '5m' }) {
   if (!secret) throw new Error('JWT_SECRET is required');
   return {
     authenticate(username, password) {
